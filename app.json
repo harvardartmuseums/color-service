@@ -1,0 +1,6 @@
+{
+  "name": "HAM Color Service",
+  "description": "A barebones service for extracting colors from an image",
+  "repository": "https://github.com/harvardartmuseums/color-service",
+  "addons": []
+}
