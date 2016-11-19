@@ -24,42 +24,47 @@ $app->get('/', function() use($app) {
 $app->get('/extract', function(Request $request) use($app) {
 	$app['monolog']->addDebug('logging output.');
 	
-	$image_URL = $request->get("image_url");
-
 	$delta = 25;
 	$reduce_brightness = true;
 	$reduce_gradients = true;
 	$num_results = 10;
 
-	$ex = new GetMostCommonColors();  
+	$image_URL = $request->get("image_url");
 
-	$colors = $ex->Get_Color($image_URL, 
-						$num_results, 
-						$reduce_brightness, 
-						$reduce_gradients, 
-						$delta);  
-	
-	$color_list = "";
-	$percentage_list= "";
-	$output = array();
+	// Make sure the parameter value is a valid URL
+	if (!filter_var($image_URL, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED) === false) {
+		$ex = new GetMostCommonColors();  
 
-	foreach ( $colors as $hex => $percentage ) {
-		if ( $percentage > 0 ) {
-			$color_list = $color_list . "#" . $hex . ", ";
-			$percentage_list = $percentage_list . $percentage . ", ";
+		$colors = $ex->Get_Color($image_URL, 
+							$num_results, 
+							$reduce_brightness, 
+							$reduce_gradients, 
+							$delta);  
+		
+		$color_list = "";
+		$percentage_list= "";
+		$output = array();
 
-			$c = array();
-			$c["color"] = "#" . $hex;
-			$c["percent"] = $percentage;
-			$c["hue"] = $ex->Get_Hue($hex);
-			$c["css3"] = "#" . $ex->Get_CSS3($hex);
-			$c["spectrum"] = "#" . $ex->Get_Spectrum($hex);
+		foreach ( $colors as $hex => $percentage ) {
+			if ( $percentage > 0 ) {
+				$color_list = $color_list . "#" . $hex . ", ";
+				$percentage_list = $percentage_list . $percentage . ", ";
 
-			$output[] = $c;
-		}
-	}	
+				$c = array();
+				$c["color"] = "#" . $hex;
+				$c["percent"] = $percentage;
+				$c["hue"] = $ex->Get_Hue($hex);
+				$c["css3"] = "#" . $ex->Get_CSS3($hex);
+				$c["spectrum"] = "#" . $ex->Get_Spectrum($hex);
 
-	return $app->json(array("colors"=>$output), 201);
+				$output[] = $c;
+			}
+		}	
+
+		return $app->json(array("colors"=>$output), 201);
+	} else {
+		return $app->json(array("status"=>"not ok"), 400);
+	}
 });
 
 $app->run();
