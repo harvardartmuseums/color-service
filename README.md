@@ -31,6 +31,36 @@ $ php -S localhost:8080 -t web web/index.php
 curl -XGET http://localhost:8080/extract?image_url=http://ids.lib.harvard.edu/ids/view/18732547
 ```
 
+## Example response (truncated)
+
+```json
+{
+	"colors": [
+		{
+			"color": "#4b3219",
+			"percent": 0.31661375661376,
+			"hue": "Brown",
+			"css3": "#556b2f",
+			"spectrum": "#4ab851"
+		},
+		{
+			"color": "#4b1900",
+			"percent": 0.17460317460317,
+			"hue": "Red",
+			"css3": "#800000",
+			"spectrum": "#59ba4a"
+		},
+		{
+			"color": "#fafafa",
+			"percent": 0.1489417989418,
+			"hue": "White",
+			"css3": "#fffafa",
+			"spectrum": "#955ba5"
+		}
+	]
+}
+```
+
 ## References
 
 This project is based on code from the article [Getting Started with PHP on Heroku](https://devcenter.heroku.com/articles/getting-started-with-php).
