@@ -32,7 +32,7 @@ $app->get('/extract', function(Request $request) use($app) {
 	$image_URL = $request->get("image_url");
 
 	// Make sure the parameter value is a valid URL
-	if (!filter_var($image_URL, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED) === false) {
+	if (!filter_var($image_URL, FILTER_VALIDATE_URL) === false) {
 		$ex = new GetMostCommonColors();  
 
 		$colors = $ex->Get_Color($image_URL, 
