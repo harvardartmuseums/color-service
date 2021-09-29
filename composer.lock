@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ec732c8ae51678974f103d351466ce5d",
+    "content-hash": "59f3b598619f0d0fc8e33b05f0e421a3",
     "packages": [
         {
             "name": "monolog/monolog",
@@ -708,16 +708,16 @@
     "packages-dev": [
         {
             "name": "heroku/heroku-buildpack-php",
-            "version": "v197",
+            "version": "v198",
             "source": {
                 "type": "git",
                 "url": "https://github.com/heroku/heroku-buildpack-php.git",
-                "reference": "0b77e568edae1c65d7cfb2f56db80291ca8688cf"
+                "reference": "043613ce119387da7e04b2ba8db00fe12ab0b55c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/0b77e568edae1c65d7cfb2f56db80291ca8688cf",
-                "reference": "0b77e568edae1c65d7cfb2f56db80291ca8688cf",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/043613ce119387da7e04b2ba8db00fe12ab0b55c",
+                "reference": "043613ce119387da7e04b2ba8db00fe12ab0b55c",
                 "shasum": ""
             },
             "bin": [
@@ -747,9 +747,9 @@
             ],
             "support": {
                 "issues": "https://github.com/heroku/heroku-buildpack-php/issues",
-                "source": "https://github.com/heroku/heroku-buildpack-php/tree/v197"
+                "source": "https://github.com/heroku/heroku-buildpack-php/tree/v198"
             },
-            "time": "2021-08-26T17:23:39+00:00"
+            "time": "2021-09-28T23:39:37+00:00"
         }
     ],
     "aliases": [],
@@ -758,11 +758,12 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
+        "php": "^7.4.0",
         "ext-gd": "*"
     },
     "platform-dev": [],
     "platform-overrides": {
-        "php": "7.3.11"
+        "php": "7.4.23"
     },
     "plugin-api-version": "2.1.0"
 }
