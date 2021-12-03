@@ -93,7 +93,7 @@ $app->get('/extract', function(Request $request) use($app) {
 
 		return $app->json(array("status"=>"ok","info"=>$info,"colors"=>$output), 201);
 	} else {
-		return $app->json(array("status"=>"not ok"), 400);
+		return $app->json(array("status"=>"not ok","info"=>$info), 400);
 	}
 });
 
