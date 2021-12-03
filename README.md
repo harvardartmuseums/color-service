@@ -41,7 +41,7 @@ Query String Parameters
 
 | Parameter | Value | Description |
 | :--------- | :----- | :----- |
-| image_url | https://YOUR_IMAGE_URL required | Any valid url that resolves to an image |
+| image_url | https://YOUR_IMAGE_URL required | Any valid URL that resolves to an image |
 | color_count | Any number > 0 (default=10) | The maximum number of colors to include in the output |
 | delta | Any number from 1-255 (default=25) | The quantization delta; the smaller the number the more accurate the color |
 | reduce_brightness | true OR false (default=true) | Reduce brightness variants of the same color |
