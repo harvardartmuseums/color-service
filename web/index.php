@@ -77,15 +77,9 @@ $app->get('/extract', function(Request $request) use($app) {
 							$delta);  
 		
 		// Process the list of colors
-		$color_list = "";
-		$percentage_list= "";
 		$output = array();
-
 		foreach ( $colors as $hex => $percentage ) {
 			if ( $percentage > 0 ) {
-				$color_list = $color_list . "#" . $hex . ", ";
-				$percentage_list = $percentage_list . $percentage . ", ";
-
 				$c = array();
 				$c["color"] = "#" . $hex;
 				$c["percent"] = $percentage;
