@@ -29,18 +29,54 @@ $app->get('/extract', function(Request $request) use($app) {
 	$reduce_gradients = true;
 	$num_results = 10;
 
+	// Read in and evalute the query string parameters
 	$image_URL = $request->get("image_url");
+	
+	if ($request->get("color_count") > 0) {
+		$num_results = $request->get("color_count");
+	};
+		
+	if ($request->get("delta") > 0 && $request->get("delta") < 256) {
+		$delta = $request->get("delta");
+	};
 
+	$brightness_param = $request->get("reduce_brightness");
+	if (isset($brightness_param)) {
+		$brightness_param = filter_var($brightness_param, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+		if (is_bool($brightness_param)) {
+			$reduce_brightness = $brightness_param;
+		}
+	}
+
+	$gradients_param = $request->get("reduce_gradients");
+	if (isset($gradients_param)) {
+		$gradients_param = filter_var($gradients_param, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+		if (is_bool($gradients_param)) {
+			$reduce_gradients = $gradients_param;
+		}
+	}
+
+	// Build the info block of data
+	$info = array();
+	$info["image_url"] = $image_URL;
+	$info["color_count"] = (float)$num_results;
+	$info["delta"] = (float)$delta;
+	$info["reduce_brightness"] = $reduce_brightness;
+	$info["reduce_gradients"] = $reduce_gradients;
+
+ 
 	// Make sure the parameter value is a valid URL
 	if (!filter_var($image_URL, FILTER_VALIDATE_URL) === false) {
-		$ex = new GetMostCommonColors();  
 
+		// Extract the colors
+		$ex = new GetMostCommonColors();  
 		$colors = $ex->Get_Color($image_URL, 
 							$num_results, 
 							$reduce_brightness, 
 							$reduce_gradients, 
 							$delta);  
 		
+		// Process the list of colors
 		$color_list = "";
 		$percentage_list= "";
 		$output = array();
@@ -61,7 +97,7 @@ $app->get('/extract', function(Request $request) use($app) {
 			}
 		}	
 
-		return $app->json(array("colors"=>$output), 201);
+		return $app->json(array("status"=>"ok","info"=>$info,"colors"=>$output), 201);
 	} else {
 		return $app->json(array("status"=>"not ok"), 400);
 	}
